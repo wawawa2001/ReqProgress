@@ -1,0 +1,185 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/editor.css')}}">
+    <title>Editor</title>
+</head>
+<body>
+    <main>
+        <div class="homebtn" onclick="gohome()">
+            <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- 家の輪郭 -->
+            <path d="M50 10 L10 50 L20 50 L20 90 L80 90 L80 50 L90 50 Z" fill="#fffff" />
+            
+            <!-- ドア -->
+            <rect x="40" y="60" width="20" height="30" fill="#FFFFFF" />
+            
+            <!-- 窓 -->
+            <rect x="30" y="40" width="15" height="15" fill="#FFFFFF" />
+            <rect x="55" y="40" width="15" height="15" fill="#FFFFFF" />
+          </svg>
+        </div>
+        <form class="container" action="" method="post" onsubmit="return set_cname()">
+            <span id="title_text" style="font-size: 30px; font-weight: bold;">
+                <input name="client_name" id="client_name_input" type="hidden">
+                <span id="cname" contenteditable="true" 
+                    style="text-align: center ;border-radius: 15px; padding: 7px; min-width: 100px; background-color: lightgray;">
+                        {{reqdata.client_name}}
+                </span>
+                <span> 様 から</span>
+
+                <br>
+
+                <input style="margin-bottom: 10px;" name="creator_name" id="creator_name_input" type="hidden">
+                <span id="crname" contenteditable="true" 
+                    style="text-align: center ;border-radius: 15px; padding: 7px; min-width: 100px; background-color: lightgray;">
+                        {{reqdata.creator_name}}
+                </span>
+                <span> 様 へのご依頼</span>
+
+            </span>
+            <div class="edit_container">
+                <section>
+                    <input name="progress" style="visibility: hidden;" type="range" id="progress_input" onchange="change_var(this.value)" step="10" min="0" max="100" value="0">
+                    <div class="var-container">
+                        <div class="glass" style="--i:1;">
+                            <div class="inner">
+                                <div id="liquid" class="liquid"></div>
+                            </div>
+                            <span id="progress_per"></span>
+                            <div class="memories">
+                                <div class="memory" onclick="change_var(this)" value="100"></div>
+                                <div class="memory" onclick="change_var(this)" value="90"></div>
+                                <div class="memory" onclick="change_var(this)" value="80"></div>
+                                <div class="memory" onclick="change_var(this)" value="70"></div>
+                                <div class="memory" onclick="change_var(this)" value="60"></div>
+                                <div class="memory" onclick="change_var(this)" value="50"></div>
+                                <div class="memory" onclick="change_var(this)" value="40"></div>
+                                <div class="memory" onclick="change_var(this)" value="30"></div>
+                                <div class="memory" onclick="change_var(this)" value="20"></div>
+                                <div class="memory" onclick="change_var(this)" value="10" style="border-bottom: 1px solid black;"></div>
+                            </div>
+                        </div>
+            
+                        <div id="progress-list" class="progress-list">
+                            <div class="memory_texts">
+                                <div class="memory_text" id="memory_text_10"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[10]}}"></div>
+                                <div class="memory_text" id="memory_text_9"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[9]}}"></div>
+                                <div class="memory_text" id="memory_text_8"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[8]}}"></div>
+                                <div class="memory_text" id="memory_text_7"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[7]}}"></div>
+                                <div class="memory_text" id="memory_text_6"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[6]}}"></div>
+                                <div class="memory_text" id="memory_text_5"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[5]}}"></div>
+                                <div class="memory_text" id="memory_text_4"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[4]}}"></div>
+                                <div class="memory_text" id="memory_text_3"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[3]}}"></div>
+                                <div class="memory_text" id="memory_text_2"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[2]}}"></div>
+                                <div class="memory_text" id="memory_text_1"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[1]}}"></div>
+                                <div class="memory_text" id="memory_text_0"><input class="memory_text_input" type="text" placeholder="←" name="progress_text" value="{{reqdata.tasks[0]}}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </section>
+            </div>
+
+            <div id="share-link" class="share-link" contenteditable="true"></div>
+            <div class="btns">
+                <button type="button" class="btn" onclick="copyShareLink()">共有リンクをコピー</button>
+                <button type="button" class="btn" onclick="deleteitem()">このアイテムを削除</button>
+                <input class="btn" type="submit" value="登録／変更する">
+            </div>
+
+        </form>
+    </main>
+</body>
+<script>
+    function change_var(elem, flg=false){
+        if(flg==true){
+            value = elem
+        }else{
+            value = elem.getAttribute("value")
+        }
+        console.log(value)
+        document.getElementById("liquid").style.top = (324 + 32.4 * 2) - (32.4 * (value / 10) + 32.4) + "px"
+        document.getElementById("progress_per").textContent = value + "%"
+        document.getElementById("progress_input").value = value
+
+        progressBar = document.getElementById("progress_per");
+        height = progressBar.offsetHeight;
+        progressBar.style.top = `calc(50% - ${height / 2}px)`;
+        
+        progressBar = document.getElementById("progress_per");
+        width = progressBar.offsetWidth;
+        width2 = document.getElementById("progress-list").offsetWidth;
+        progressBar.style.left = `calc(50% - ${width / 2}px)`;
+    }
+
+    function set_cname(){
+        cname = document.getElementById("cname").textContent
+        input = document.getElementById("client_name_input")
+        input.value = cname
+
+        cname = document.getElementById("crname").textContent
+        input = document.getElementById("creator_name_input")
+        input.value = cname
+
+        return true
+    }
+
+    function generateURL(){
+        const url = new URL(location.href);
+        const params = url.searchParams;
+        params.delete('id');
+        urltext = url.toString().replace("reqedit", "req")
+        document.getElementById("share-link").textContent = urltext
+    }
+
+    function copyShareLink() {
+        const shareLink = document.getElementById('share-link');
+        shareLink.focus();
+        document.execCommand('selectAll', false, null);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('リンクがクリップボードにコピーされました');
+    }
+
+    function gohome(){
+        const url = new URL(location.href);
+        const params = url.searchParams;
+        params.delete('req_id');
+        urltext = url.toString().replace("reqedit", "manage")
+        window.location.href = urltext
+    }
+
+    function deleteitem(){
+        const url = new URL(location.href);
+        const params = url.searchParams;
+        const mgrid = params.get("id");
+        const reqid = params.get("req_id");
+
+        const delurl = url.toString().replace("reqedit", "delete");
+
+        fetch(delurl)
+            .then(data => {
+                console.log("Access Delete URL.");
+                
+                // fetch操作が完了してから新しいURLに遷移する
+                const url2 = new URL(delurl);
+                const params2 = url2.searchParams;
+                params2.delete("req_id");
+
+                const newurl = url2.toString().replace("delete", "manage");
+
+                window.location.href = newurl;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                // エラーが発生した場合の処理
+            });
+
+    }
+
+    generateURL()
+    change_var({{reqdata.progress}}, flg=true)
+</script>
+</html>

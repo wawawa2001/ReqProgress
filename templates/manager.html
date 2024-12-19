@@ -1,0 +1,50 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/manager.css')}}">
+    <title>Manage</title>
+</head>
+<body>
+    
+    <main>
+        <div><span style="font-size: 30px; color:red;">※このページのURLは必ず覚えておいてください！</span></div>
+        <div class="reqs">
+            {% for req in reqs %}
+
+                <div class="req" onclick="location.href='/reqedit?id={{req.mgr_id}}&req_id={{req.req_uuid}}'">
+                    <span>{{req.client_name}} 様</span><br>
+                    <span style="font-size: 24px;">{{req.progress}} %</span>
+                    <span style="font-size: 14px; margin-top: 10px;">
+                        {% if req.progress %}
+                            {% with index=req.progress // 10 %}
+                                {% for i in range(index, -1, -1) %}
+                                    {% if req.tasks[i] != '' %}
+                                        {{ req.tasks[i] }} <br><span>　　　　　まで完了</span>
+                                        {% break %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        {% endif %}
+                    </span>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="generate" onclick="generate_new_req()">
+            <span>新規で依頼を作成する</span>
+        </div>
+    </main>
+</body>
+<script>
+    function generate_new_req(){
+        const uuid = crypto.randomUUID();
+        const url = new URL(location.href);
+        const params = url.searchParams;
+        params.append('req_id', uuid);
+        urltext = url.toString().replace("manage", "reqedit")
+        window.location.href = urltext
+    }
+</script>
+</html>

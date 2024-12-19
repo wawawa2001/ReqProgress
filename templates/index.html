@@ -1,0 +1,19 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+    <title>Top Page</title>
+</head>
+<body>
+    <div class="new_manager" onclick="generate_new_mgr()">
+      <span>管理画面を立ち上げる</span>
+    </div>
+</body>
+<script>
+    function generate_new_mgr(){
+        const uuid = crypto.randomUUID();
+        window.location.href = location.href + "manage?id=" + uuid
+    }
+</script>
+</html>

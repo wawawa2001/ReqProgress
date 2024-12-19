@@ -1,0 +1,82 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/req.css')}}">
+    <title>Req Progress</title>
+</head>
+<body>
+    <main>
+        <form class="container" action="" method="post" onsubmit="return set_cname()">
+            <span style="font-size: 50px; font-weight: bold;"><span id="cname" style="display: block; text-align: center ;border-radius: 15px; padding: 7px; min-width: 100px; border: none !important;">{{reqdata.creator_name}} 様 </span><span style="display: block; text-align: center;">へのご依頼状況</span>
+            <div class="edit_container">
+                <section>
+                    <div class="var-container">
+                        <div class="glass" style="--i:1;">
+                            <div class="inner">
+                                <div id="liquid" class="liquid"></div>
+                            </div>
+                            <span id="progress_per"></span>
+                            <div class="memories">
+                                <div class="memory" value="100"></div>
+                                <div class="memory" value="90"></div>
+                                <div class="memory" value="80"></div>
+                                <div class="memory" value="70"></div>
+                                <div class="memory" value="60"></div>
+                                <div class="memory" value="50"></div>
+                                <div class="memory" value="40"></div>
+                                <div class="memory" value="30"></div>
+                                <div class="memory" value="20"></div>
+                                <div class="memory" value="10" style="border-bottom: 1px solid black;"></div>
+                            </div>
+                        </div>
+            
+                        <div id="progress-list" class="progress-list">
+                            <div class="memory_texts">
+                                <div class="memory_text" id="memory_text_10">{% if reqdata.tasks.10|length > 0 %}←{% endif %}{{reqdata.tasks[10]}}</div>
+                                <div class="memory_text" id="memory_text_9">{% if reqdata.tasks.9|length > 0 %}←{% endif %}{{reqdata.tasks[9]}}</div>
+                                <div class="memory_text" id="memory_text_8">{% if reqdata.tasks.8|length > 0 %}←{% endif %}{{reqdata.tasks[8]}}</div>
+                                <div class="memory_text" id="memory_text_7">{% if reqdata.tasks.7|length > 0 %}←{% endif %}{{reqdata.tasks[7]}}</div>
+                                <div class="memory_text" id="memory_text_6">{% if reqdata.tasks.6|length > 0 %}←{% endif %}{{reqdata.tasks[6]}}</div>
+                                <div class="memory_text" id="memory_text_5">{% if reqdata.tasks.5|length > 0 %}←{% endif %}{{reqdata.tasks[5]}}</div>
+                                <div class="memory_text" id="memory_text_4">{% if reqdata.tasks.4|length > 0 %}←{% endif %}{{reqdata.tasks[4]}}</div>
+                                <div class="memory_text" id="memory_text_3">{% if reqdata.tasks.3|length > 0 %}←{% endif %}{{reqdata.tasks[3]}}</div>
+                                <div class="memory_text" id="memory_text_2">{% if reqdata.tasks.2|length > 0 %}←{% endif %}{{reqdata.tasks[2]}}</div>
+                                <div class="memory_text" id="memory_text_1">{% if reqdata.tasks.1|length > 0 %}←{% endif %}{{reqdata.tasks[1]}}</div>
+                                <div class="memory_text" id="memory_text_0">{% if reqdata.tasks.0|length > 0 %}←{% endif %}{{reqdata.tasks[0]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </section>
+            </div>
+
+        </form>
+    </main>
+</body>
+
+<script>
+    function change_var(elem, flg=false){
+        if(flg==true){
+            value = elem
+        }else{
+            value = elem.getAttribute("value")
+        }
+        console.log(value)
+        document.getElementById("liquid").style.top = (324 + 32.4 * 2) - (32.4 * (value / 10) + 32.4) + "px"
+        document.getElementById("progress_per").textContent = value + "%"
+
+        progressBar = document.getElementById("progress_per");
+        height = progressBar.offsetHeight;
+        progressBar.style.top = `calc(50% - ${height / 2}px)`;
+        
+        progressBar = document.getElementById("progress_per");
+        width = progressBar.offsetWidth;
+        width2 = document.getElementById("progress-list").offsetWidth;
+        progressBar.style.left = `calc(50% - ${width / 2}px)`;
+    }
+
+    change_var({{reqdata.progress}}, flg=true)
+</script>
+
+</html>
