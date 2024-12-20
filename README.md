@@ -36,7 +36,8 @@
     ```
 
 2. **データベースの設定**
-   - PostgreSQL データベースを作成し、main.pyの`app.config['SQLALCHEMY_DATABASE_URI']` の値を適切に設定します。
+   - PostgreSQLでデータベースを作成し、main.pyの`app.config['SQLALCHEMY_DATABASE_URI']` の値を適切に設定します。
+   - テーブルはschema.sqlで作成できます。
 
 3. **アプリケーションの起動**
     ```bash
@@ -44,7 +45,8 @@
     ```
 
 4. **アクセス**
-   - ブラウザで `http://0.0.0.0:8001` にアクセスします。
+   - ブラウザで `http://localhost:8001` にアクセスします。
+   - ルータ設定後に外部公開も可能です。
 
 ## エンドポイントの詳細
 ### `/`
