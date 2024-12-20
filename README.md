@@ -66,6 +66,7 @@
 2. **データベースの設定**
    - PostgreSQLでデータベースを作成し、main.pyの`app.config['SQLALCHEMY_DATABASE_URI']` の値を適切に設定します。
    - テーブルはschema.sqlで作成できます。
+   - その後、main.pyで`app.config['SQLALCHEMY_DATABASE_URI']` の値を適切に設定
 
 3. **アプリケーションの起動**
     ```bash
