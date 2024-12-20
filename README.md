@@ -32,21 +32,25 @@
 
 ## 画面イメージ
 
+### TOPページ
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/b91f62ac-e452-463d-938c-eb8cecb75ea7" />
+
 ### クリエイター管理画面
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/a3305b0b-a88d-4355-a97c-1638439c4a59" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/a3305b0b-a88d-4355-a97c-1638439c4a59" />
 
 ### 各依頼 管理画面
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/48dc019f-3f3b-4fce-b159-af2e3ccf6693" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/48dc019f-3f3b-4fce-b159-af2e3ccf6693" />
 
 ### 入力例
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/c8ee668d-522e-4b00-811c-edf160b43db9" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/c8ee668d-522e-4b00-811c-edf160b43db9" />
 
 ### クライアント側画面（PC例）
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/39b0f029-314e-49c6-b0cd-b890f3402949" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/39b0f029-314e-49c6-b0cd-b890f3402949" />
 
 ### クライアント側画面（スマホ例）
 
