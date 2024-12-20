@@ -82,8 +82,8 @@
 - **ログレベル**: DEBUG, INFO, WARNING, ERROR
 
 ## 注意事項
-- SSL 証明書 (`cert.pem` と `privkey.pem`) を適切に設定する必要があります。
-- UUID の形式チェックを行う `is_valid_uuid` 関数を利用しています。
+- main.pyにて、SSL 証明書 (`cert.pem` と `privkey.pem`) を適切に設定する必要があります。
+- PostgreSQL データベースを作成し、main.pyの`app.config['SQLALCHEMY_DATABASE_URI']` の値を適切に設定します。
 
 ## トラブルシューティング
 - **データベース接続エラー**:
