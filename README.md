@@ -20,13 +20,14 @@
    - ログはファイルとコンソールに出力されます。
 
 ## ファイル構成
-- `app.py` : メインの Flask アプリケーション。
+- `main.py` : メインの Flask アプリケーション。
 - `templates/` : HTML テンプレートを格納するディレクトリ。
 - `static/` : CSS, FONTを格納するディレクトリ。
 - `app.log` : アプリケーションのログファイル。
+- `requiments.txt` : ライブラリ情報
 
 ## 必要要件
-- Python 3.x
+- Python 3.9以上
 - Flask
 - Flask-SQLAlchemy
 - PostgreSQL データベース
