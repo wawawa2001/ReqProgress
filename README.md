@@ -36,11 +36,11 @@
     ```
 
 2. **データベースの設定**
-   - PostgreSQL データベースを作成し、`app.config['SQLALCHEMY_DATABASE_URI']` の値を適切に設定します。
+   - PostgreSQL データベースを作成し、main.pyの`app.config['SQLALCHEMY_DATABASE_URI']` の値を適切に設定します。
 
 3. **アプリケーションの起動**
     ```bash
-    python main.py
+    python3 main.py
     ```
 
 4. **アクセス**
