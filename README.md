@@ -25,6 +25,7 @@
 - `static/` : CSS, FONTを格納するディレクトリ。
 - `app.log` : アプリケーションのログファイル。
 - `requiments.txt` : ライブラリ情報
+- `schema.sql` : テーブルスキーマ
 
 ## 必要要件
 - Python 3.9以上
