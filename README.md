@@ -28,14 +28,11 @@
 
 ## 必要要件
 - Python 3.9以上
-- Flask
-- Flask-SQLAlchemy
-- PostgreSQL データベース
 
 ## セットアップ手順
 1. **依存関係のインストール**
     ```bash
-    pip install flask flask-sqlalchemy
+    pip install -r requiments.txt
     ```
 
 2. **データベースの設定**
@@ -43,7 +40,7 @@
 
 3. **アプリケーションの起動**
     ```bash
-    python app.py
+    python main.py
     ```
 
 4. **アクセス**
